@@ -3,8 +3,15 @@ const API_KEY = "7728721-8f567dd07946de7960dce4801"
 const BASE_URL = "https://pixabay.com/api/"
 
 
-const getImagesByQuery = (query) => axios.get(`${BASE_URL}/?${API_KEY}&q=${query}&image_type=photo&orientation=horizontal&safesearch=true`)
-
+const getImagesByQuery = (query) => {
+    const params = new URLSearchParams({
+        per_page: limit,
+        // Change the group number here
+        page: pageNumber
+      })
+    
+    axios.get(`${BASE_URL}/?${params}${API_KEY}&q=${query}&image_type=photo&orientation=horizontal&safesearch=true`)
+}
 // fetch()
 //   .then(response => {
 //     if (!response.ok) {
@@ -13,31 +20,47 @@ const getImagesByQuery = (query) => axios.get(`${BASE_URL}/?${API_KEY}&q=${query
 //     return response.json();
 //   })
 
-function renderCard(recievedData){
-    const photosArray = recievedData
-    .map(photo=>{webformatURL, largeImageURL, tags, 
+function renderCards(recievedData){
+    const markup = recievedData.map(({webformatURL, largeImageURL, tags, 
         likes,
         views,
         comments,
-        downloads})
+        downloads})=>{ return `<li class="photo-card">
+        <a class="gallery__link" href="${largeImageURL}">
+        <img src="${webformatURL}" alt="${tags}" loading="lazy" />
+        <div class="info">
+          <p class="info-item">
+             <b>${likes}Likes</b>
+          </p>
+          <p class="info-item">
+            <b>${views}Views</b>
+          </p>
+          <p class="info-item">
+            <b>${comments}Comments</b>
+          </p>
+          <p class="info-item">
+            <b>${downloads}Downloads</b>
+          </p>
+        </div>
+        </a>
+        </li>`})  
+    .join("")
+    galleryEl.innerHTML=markup;
 
-        `<div class="photo-card">
-<img src="" alt="" loading="lazy" />
-<div class="info">
-  <p class="info-item">
-    <b>Likes</b>
-  </p>
-  <p class="info-item">
-    <b>Views</b>
-  </p>
-  <p class="info-item">
-    <b>Comments</b>
-  </p>
-  <p class="info-item">
-    <b>Downloads</b>
-  </p>
-</div>
-</div>`
 }
 
-  export {getImagesByQuery, renderCard}
+// function renderPosts(posts) {
+    //   const markup = posts
+    //     .map(({ id, title, body, userId }) => {
+    //       return `<li>
+    //           <h2 class="post-title">${title.slice(0, 30)}</h2>
+    //           <p><b>Post id</b>: ${id}</p>
+    //           <p><b>Author id</b>: ${userId}</p>
+    //           <p class="post-body">${body}</p>
+    //         </li>`;
+    //     })
+    //     .join("");
+    //   userList.insertAdjacentHTML("beforeend", markup);
+    // }
+
+  export {getImagesByQuery, renderCards}
