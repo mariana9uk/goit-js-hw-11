@@ -2,8 +2,8 @@ import axios from "axios";
 
 
 export class PixabayAPI{
-  #API_KEY = "7728721-8f567dd07946de7960dce4801"
-  #BASE_URL = "https://pixabay.com/api/"
+
+  // #BASE_URL = "https://pixabay.com/api/"
     // const params = new URLSearchParams({
     //     per_page: limit,
     //     // Change the group number here
@@ -11,7 +11,7 @@ export class PixabayAPI{
     query=null;
     page=1;
     fetchPhotos(){
-   return axios.get(`${this.#BASE_URL}/?${this.#API_KEY}&q=${this.query}&page=${this.page}&per_page=40&image_type=photo&orientation=horizontal&safesearch=true`)}
+   return axios.get(`https://pixabay.com/api/?key=7728721-8f567dd07946de7960dce4801&q=${this.query}&page=${this.page}&per_page=40&image_type=photo&orientation=horizontal&safesearch=true`)}
 }
 // fetch()
 //   .then(response => {
@@ -64,4 +64,4 @@ function renderCards(recievedData){
     //   userList.insertAdjacentHTML("beforeend", markup);
     // }
 
-  export {PixabayAPI, renderCards}
+  export {renderCards}

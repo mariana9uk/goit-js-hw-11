@@ -13,7 +13,7 @@ let isAlertVisible = false;
 let limit=40;
 let pageNumber=1;
 
-const PixabaIstance = new PixabayAPI()
+const pixabaIstance = new PixabayAPI()
 
 console.log(searchButtonEl)
 
@@ -23,18 +23,19 @@ const handleSubmit = async event =>{
       if (!searchQuery) {
       return  
     } 
-        PixabaIstance.query=searchQuery;
+        pixabaIstance.query=searchQuery;
         console.log(searchQuery)
-    isLoaderActive=true;
-    try{
-  const {recievedData} = await PixabaIstance
-.fetchPhotos()
-if (!recievedData.results.length) {
-    Notiflix.Notify.failure('Images not found');
-    return 
-}
-renderCards(recievedData.results)}
 
+    try{
+  const {recievedData} = await pixabaIstance
+.fetchPhotos();
+console.log(recievedData)
+// if (!recievedData.results.length) {
+//     Notiflix.Notify.failure('Images not found');
+//     return 
+// }
+// renderCards(recievedData)}
+    }
 catch(err){
     console.log(err)
 erMessage.classList.remove("is-hidden")
