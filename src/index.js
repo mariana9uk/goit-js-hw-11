@@ -1,52 +1,68 @@
 import axios from "axios";
 import Notiflix from 'notiflix';
-import { getImagesByQuery, renderCards } from "./images-api";
-
+import {PixabayAPI, renderCards} from "./images-api";
+const searchFormEl=document.querySelector(".search-form")
 const galleryEl = document.querySelector(".gallery");
-const InutEl = document.querySelector('#searchInput');
+const InutEl = searchFormEl.firstElementChild;
 const searchButtonEl = document.querySelector("#searchButton");
+const loadMoreButton = document.querySelector("load-more")
+const erMessage=document.querySelector(".error") 
+
 let isLoaderActive=false;
 let isAlertVisible = false;
 let limit=40;
 let pageNumber=1;
 
+const PixabaIstance = new PixabayAPI()
+
 console.log(searchButtonEl)
-const handleSubmit = (event) =>{
+
+const handleSubmit = async event =>{
     event.preventDefault();
-    const query = event.target.value.trim();
-    console.log(query)
-    if (condition) {
-        
-    } else {
-        
-    }
-   
+    const searchQuery = InutEl.value.trim();
+      if (!searchQuery) {
+      return  
+    } 
+        PixabaIstance.query=searchQuery;
+        console.log(searchQuery)
     isLoaderActive=true;
-toggleLoader()
-getImagesByQuery(query)
+    try{
+  const {recievedData} = await PixabaIstance
+.fetchPhotos()
+if (!recievedData.results.length) {
+    Notiflix.Notify.failure('Images not found');
+    return 
+}
+renderCards(recievedData.results)}
+
+catch(err){
+    console.log(err)
+erMessage.classList.remove("is-hidden")
+}
+// toggleLoader()
+// getImagesByQuery(searchQuery)
+
     // fetch
-  
+   
 }
 
-
-
-searchButtonEl.addEventListener("submit", handleSubmit)
-function toggleLoader() {
-    if (isLoaderActive) {
+searchFormEl.addEventListener("submit", handleSubmit)
+// function toggleLoader() {
+//     if (isLoaderActive) {
       
-    //   selectorEl.classList.add("is-hidden")
-    //   loaderEl.classList.remove("is-hidden");
-    //   catInfoWrapEl.classList.add("is-hidden");
-      Notiflix.Loading.dots()
-    } else {
-    //   selectorEl.classList.remove("is-hidden");
-    //   loaderEl.classList.add("is-hidden");
-    //        catInfoWrapEl.classList.remove("is-hidden");
-           Notiflix.Loading.remove()
-    }
+//     //   selectorEl.classList.add("is-hidden")
+//     //   loaderEl.classList.remove("is-hidden");
+//     //   catInfoWrapEl.classList.add("is-hidden");
+//       Notiflix.Loading.dots()
+//     } else {
+//     //   selectorEl.classList.remove("is-hidden");
+//     //   loaderEl.classList.add("is-hidden");
+//     //        catInfoWrapEl.classList.remove("is-hidden");
+//            Notiflix.Loading.remove()
+//     }
     
-  }
-//   let page = 1;
+//   }
+// //   let page = 1;
 // // Controls the number of items in the group
 // let limit = 5;
 // // In our case total number of pages is calculated on frontend
@@ -102,15 +118,15 @@ function toggleLoader() {
 //   userList.insertAdjacentHTML("beforeend", markup);
 // }
 
-function toggleAlertPopup() {
-  if (isAlertVisible) {
-    return;
-  }
-  isAlertVisible = true;
-  alertPopup.classList.add("is-visible");
-  setTimeout(() => {
-    alertPopup.classList.remove("is-visible");
-    isAlertVisible = false;
-  }, 3000);
-}
+// function toggleAlertPopup() {
+//   if (isAlertVisible) {
+//     return;
+//   }
+//   isAlertVisible = true;
+//   alertPopup.classList.add("is-visible");
+//   setTimeout(() => {
+//     alertPopup.classList.remove("is-visible");
+//     isAlertVisible = false;
+//   }, 3000);
+// }
  
