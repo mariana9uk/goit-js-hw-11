@@ -2,27 +2,22 @@ import axios from "axios";
 
 
 export class PixabayAPI{
-
-  // #BASE_URL = "https://pixabay.com/api/"
-    // const params = new URLSearchParams({
-    //     per_page: limit,
-    //     // Change the group number here
-    //     page: pageNumber
-    query=null;
-    page=1;
-    fetchPhotos(){
-   return axios.get(`https://pixabay.com/api/?key=7728721-8f567dd07946de7960dce4801&q=${this.query}&page=${this.page}&per_page=40&image_type=photo&orientation=horizontal&safesearch=true`)}
+    query = null;
+    page = 1;
+    async fetchPhotos(){
+  return await axios.get(`https://pixabay.com/api/`, {
+   params: {
+    key: '7728721-8f567dd07946de7960dce4801',
+    q: this.query,
+    page: this.page, 
+    per_page: 40,
+    image_type: "photo",
+    orientation: "horizontal",
+    safesearch: true}})}
 }
-// fetch()
-//   .then(response => {
-//     if (!response.ok) {
-//       throw new Error(response.status);
-//     }
-//     return response.json();
-//   })
 
-function renderCards(recievedData){
-    const markup = recievedData.map(({webformatURL, largeImageURL, tags, 
+export function renderCards(data){
+    const markup = data.map(({webformatURL, largeImageURL, tags, 
         likes,
         views,
         comments,
@@ -64,4 +59,4 @@ function renderCards(recievedData){
     //   userList.insertAdjacentHTML("beforeend", markup);
     // }
 
-  export {renderCards}
+ 

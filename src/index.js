@@ -3,15 +3,12 @@ import Notiflix from 'notiflix';
 import {PixabayAPI, renderCards} from "./images-api";
 const searchFormEl=document.querySelector(".search-form")
 const galleryEl = document.querySelector(".gallery");
-const InutEl = searchFormEl.firstElementChild;
+const inutEl = searchFormEl.firstElementChild;
 const searchButtonEl = document.querySelector("#searchButton");
-const loadMoreButton = document.querySelector("load-more")
+const loadMoreButton = document.querySelector(".load-more")
 const erMessage=document.querySelector(".error") 
 
-let isLoaderActive=false;
-let isAlertVisible = false;
-let limit=40;
-let pageNumber=1;
+
 
 const pixabaIstance = new PixabayAPI()
 
@@ -19,31 +16,28 @@ console.log(searchButtonEl)
 
 const handleSubmit = async event =>{
     event.preventDefault();
-    const searchQuery = InutEl.value.trim();
+    const searchQuery = inutEl.value.trim();
       if (!searchQuery) {
       return  
     } 
         pixabaIstance.query=searchQuery;
         console.log(searchQuery)
 
-    try{
-  const {recievedData} = await pixabaIstance
-.fetchPhotos();
-console.log(recievedData)
-// if (!recievedData.results.length) {
-//     Notiflix.Notify.failure('Images not found');
-//     return 
-// }
-// renderCards(recievedData)}
+        try {
+            const { data } = await pixabaIstance.fetchPhotos();
+        console.log(data)
+            if (!data) {
+              console.log('Images not found!');
+              throw new Error();
+            }
+        
+            renderCards();
+            loadMoreButton.classList.remove('is-hidden');
     }
 catch(err){
     console.log(err)
 erMessage.classList.remove("is-hidden")
 }
-// toggleLoader()
-// getImagesByQuery(searchQuery)
-
-    // fetch
    
 }
 
