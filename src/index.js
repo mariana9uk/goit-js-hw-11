@@ -26,12 +26,13 @@ const handleSubmit = async event =>{
         try {
             const { data } = await pixabaIstance.fetchPhotos();
         console.log(data)
-            if (!data) {
+            if (!data.hits.length) {
               console.log('Images not found!');
               throw new Error();
             }
+            const markup = renderCards(data.hits);
+            galleryEl.innerHTML =markup;
         
-            renderCards();
             loadMoreButton.classList.remove('is-hidden');
     }
 catch(err){

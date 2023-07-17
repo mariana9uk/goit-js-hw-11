@@ -41,11 +41,7 @@ button:hover {
     background-color:purple ;
 }
 
-#imageGallery {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-}
+
 
 .imageCard {
     border: 1px solid #ccc;
@@ -61,13 +57,39 @@ button:hover {
     text-align: center;
 }
 .gallery {
-    display: grid;
-    max-width: 1140px;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    grid-auto-rows: 240px;
-    grid-gap: 12px;
-    justify-content: center;
-    margin-left: auto;
-    margin-right: auto;
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -30px;
+    margin-top: -30px;
+    margin-bottom: 20px;
     list-style: none;
+  }
+  
+  .photo-card{
+    flex-basis: calc((100% - 120px) / 4);
+    margin-left: 30px;
+    margin-top: 100px;
+  }
+  
+  .gallery-img {
+    width: 100%;
+    height: 100%;
+    max-width: unset;
+    object-fit: cover;
+  }
+  .gallery__link{
+    text-decoration:none;
+    
+
+  }
+  .info{
+    margin-top: 5px;
+    text-decoration: none;
+    color: black;
+
+  }
+  .info-item{
+    margin: auto;
+    font-family:'Segoe UI', sans-serif;
+    font-weight: lighter;
   }

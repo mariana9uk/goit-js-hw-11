@@ -16,14 +16,14 @@ export class PixabayAPI{
     safesearch: true}})}
 }
 
-export function renderCards(data){
-    const markup = data.map(({webformatURL, largeImageURL, tags, 
+export function renderCards(dataArr){
+ return  dataArr.map(({webformatURL, largeImageURL, tags, 
         likes,
         views,
         comments,
-        downloads})=>{ return `<li class="photo-card">
+        downloads})=>{return `<li class="photo-card">
         <a class="gallery__link" href="${largeImageURL}">
-        <img src="${webformatURL}" alt="${tags}" loading="lazy" />
+        <img src="${webformatURL}" alt="${tags}" loading="lazy" class="gallery-img" />
         <div class="info">
           <p class="info-item">
              <b>${likes}Likes</b>
@@ -41,7 +41,7 @@ export function renderCards(data){
         </a>
         </li>`})  
     .join("")
-    galleryEl.innerHTML=markup;
+    // galleryEl.innerHTML=markup;
 
 }
 
