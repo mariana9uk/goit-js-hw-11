@@ -18,12 +18,12 @@ console.log(searchButtonEl)
 const handleSubmit = async event =>{
     event.preventDefault();
     const searchQuery = inutEl.value.trim();
-      if (!searchQuery) {
-      return  
-    } 
-        pixabaIstance.query=searchQuery;
+    pixabaIstance.query=searchQuery;
+    pixabaIstance.page=1;
         console.log(searchQuery)
-
+    //   if (!searchQuery) {
+    //   return  
+    // } 
         try {
             const { data } = await pixabaIstance.fetchPhotos();
         console.log(data)
@@ -50,11 +50,13 @@ galleryEl.innerHTML="";
   pixabaIstance.page += 1;
 
   try {const { data } = await pixabaIstance.fetchPhotos();
-
-    if (pixabaIstance.page === data.totalHits) {
+const totalPages = data.totalHits/pixabaIstance.per_page
+console.log(totalPages)
+    if (pixabaIstance.page === totalPages||pixabaIstance.page >totalPages) {
       console.log("The end!")
       loadMoreButton.classList.add('is-hidden')
     } 
+    console.log(pixabaIstance.page)
     console.log(data.totalHits)
    const markup = renderCards(data.hits);
    galleryEl.insertAdjacentHTML(

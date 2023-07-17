@@ -4,13 +4,14 @@ import axios from "axios";
 export class PixabayAPI{
     query = null;
     page = 1;
+    per_page = 40;
     async fetchPhotos(){
   return await axios.get(`https://pixabay.com/api/`, {
    params: {
     key: '7728721-8f567dd07946de7960dce4801',
     q: this.query,
     page: this.page, 
-    per_page: 40,
+    per_page: this.per_page,
     image_type: "photo",
     orientation: "horizontal",
     safesearch: true}})}
