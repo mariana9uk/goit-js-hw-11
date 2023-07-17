@@ -61,6 +61,7 @@ console.log(totalPages)
    const markup = renderCards(data.hits);
    galleryEl.insertAdjacentHTML(
     'beforeend', markup );
+    Notiflix.Notify.success(`Hooray! We found ${data.totalHits} images.`) 
     console.log(data);
   } catch (error) {
     console.log("Woops!")
@@ -69,6 +70,7 @@ console.log(totalPages)
 }
 
 
+console.log(galleryItems)
 searchFormEl.addEventListener("submit", handleSubmit)
 console.log(biggerImageLink)
 loadMoreButton.addEventListener("click", handleLoadMore)
