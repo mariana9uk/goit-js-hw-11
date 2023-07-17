@@ -70,7 +70,6 @@ console.log(totalPages)
 }
 
 
-console.log(galleryItems)
 searchFormEl.addEventListener("submit", handleSubmit)
 console.log(biggerImageLink)
 loadMoreButton.addEventListener("click", handleLoadMore)
