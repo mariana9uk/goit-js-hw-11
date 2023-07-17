@@ -9,6 +9,11 @@ body {
     padding: 20px;
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  
+}
+ul{
+  padding: 0;
+  margin: 0 auto;
 }
 
 h1 {
@@ -16,15 +21,21 @@ h1 {
 }
 .is-hidden{
     display:none;
+
 }
 
-input[type="text"] {
-
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    max-width: 100%;
-  
+.search-form{
+  display: flex;
+  width: 600px;
+  margin: 0 auto;
+  margin-bottom: 40px;
+}
+.search-input {
+  height: 39px;
+  flex-grow: 1;
+  font-size: 18px;
+  padding-left: 15px;
+  border: 1px solid lightgray;
 }
 
 button {
@@ -37,11 +48,18 @@ button {
 
 }
 
+
 button:hover {
     background-color:purple ;
 }
 
-
+.load-more{
+  display: block;
+  margin:0 auto;
+}
+.load-more.is-hidden {
+  display: none;
+}
 
 .imageCard {
     border: 1px solid #ccc;
@@ -49,31 +67,35 @@ button:hover {
     text-align: center;
 }
 
-.imageCard img {
-    max-width: 100%;
-    height: auto;
-}
+
 .error{
     text-align: center;
 }
 .gallery {
     display: flex;
     flex-wrap: wrap;
-    margin-left: -30px;
-    margin-top: -30px;
+padding: 0;
+  
     margin-bottom: 20px;
     list-style: none;
+    padding-inline-start: 0;
+    margin-block-start:0;
+    column-gap: 20px;
+    row-gap: 30px;
+    justify-content: center;
   }
   
   .photo-card{
-    flex-basis: calc((100% - 120px) / 4);
-    margin-left: 30px;
-    margin-top: 100px;
+    flex-basis: calc(50% - 25px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+border: 1px solid gainsboro;
+border-radius: 10px;
   }
   
   .gallery-img {
     width: 100%;
-    height: 100%;
     max-width: unset;
     object-fit: cover;
   }
@@ -86,10 +108,22 @@ button:hover {
     margin-top: 5px;
     text-decoration: none;
     color: black;
-
-  }
-  .info-item{
-    margin: auto;
+    margin: 0;
     font-family:'Segoe UI', sans-serif;
     font-weight: lighter;
+    display: flex;
+  
+    padding:  10px;
+    justify-content: space-between;
+    column-gap: 10px;
+  }
+  .info-item{
+margin: 0;
+    font-family:'Segoe UI', sans-serif;
+    font-weight: lighter;
+    display: flex;
+    flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
   }

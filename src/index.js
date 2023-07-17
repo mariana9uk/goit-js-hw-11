@@ -1,5 +1,6 @@
 import axios from "axios";
 import Notiflix from 'notiflix';
+
 import {PixabayAPI, renderCards} from "./images-api";
 const searchFormEl=document.querySelector(".search-form")
 const galleryEl = document.querySelector(".gallery");
@@ -7,7 +8,7 @@ const inutEl = searchFormEl.firstElementChild;
 const searchButtonEl = document.querySelector("#searchButton");
 const loadMoreButton = document.querySelector(".load-more")
 const erMessage=document.querySelector(".error") 
-
+const biggerImageLink=document.querySelector(".gallery__link")
 
 
 const pixabaIstance = new PixabayAPI()
@@ -30,19 +31,46 @@ const handleSubmit = async event =>{
               console.log('Images not found!');
               throw new Error();
             }
+            erMessage.classList.add("is-hidden")
             const markup = renderCards(data.hits);
             galleryEl.innerHTML =markup;
         
             loadMoreButton.classList.remove('is-hidden');
+            
     }
 catch(err){
     console.log(err)
 erMessage.classList.remove("is-hidden")
-}
-   
+loadMoreButton.classList.add('is-hidden')
+galleryEl.innerHTML="";
 }
 
+}
+ const handleLoadMore= async () => {
+  pixabaIstance.page += 1;
+
+  try {const { data } = await pixabaIstance.fetchPhotos();
+
+    if (pixabaIstance.page === data.totalHits) {
+      console.log("The end!")
+      loadMoreButton.classList.add('is-hidden')
+    } 
+    console.log(data.totalHits)
+   const markup = renderCards(data.hits);
+   galleryEl.insertAdjacentHTML(
+    'beforeend', markup );
+    console.log(data);
+  } catch (error) {
+    console.log("Woops!")
+    Notiflix.Notify.failure('❌Помилка');
+  }
+}
+
+
 searchFormEl.addEventListener("submit", handleSubmit)
+console.log(biggerImageLink)
+loadMoreButton.addEventListener("click", handleLoadMore)
+
 // function toggleLoader() {
 //     if (isLoaderActive) {
       

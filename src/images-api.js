@@ -24,21 +24,22 @@ export function renderCards(dataArr){
         downloads})=>{return `<li class="photo-card">
         <a class="gallery__link" href="${largeImageURL}">
         <img src="${webformatURL}" alt="${tags}" loading="lazy" class="gallery-img" />
+        </a>
         <div class="info">
           <p class="info-item">
-             <b>${likes}Likes</b>
+             <b>Likes</b>${likes}
           </p>
           <p class="info-item">
-            <b>${views}Views</b>
+            <b>Views</b>${views}
           </p>
           <p class="info-item">
-            <b>${comments}Comments</b>
+            <b>Comments</b>${comments}
           </p>
           <p class="info-item">
-            <b>${downloads}Downloads</b>
+            <b>Downloads</b>${downloads}
           </p>
         </div>
-        </a>
+        
         </li>`})  
     .join("")
     // galleryEl.innerHTML=markup;
